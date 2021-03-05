@@ -1,0 +1,154 @@
+{% extends 'p_optimizer/base.html' %}
+
+{% block content %}
+<header>
+
+</header>
+<div class='container'>
+    <div class='form_container'>
+        <form class='form-horizontal' role='form'>
+            {% csrf_token %}
+            <div class='form-group' style="border-bottom: 1px solid lightgrey;">
+                <div class='form_label'>
+                    <label for='time_period'>Time Period </label>
+                </div>
+                <div class='form_input'>
+                    <div class="time_selection" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="time_period" value="y">Yearly
+                        </label>
+                        <label class="btn btn-default active">
+                            <input type="radio" name="time_period" value="m" checked>Monthly
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="time_period" value="w">Weekly
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="time_period" value="d">Daily
+                        </label>
+                    </div> 
+                </div>
+            </div>
+            <div class='form-group' style="display: flex; height:300px; border-bottom: 1px solid lightgrey;">
+                <div style="width:50%;">
+                    <div class="form_label" style="height:auto;">
+                        <label for='start_date'> Start date </label>
+                    </div>
+                    <div class="form_input" style="height:100%;padding:50px 80px;font-size: 10px;">
+                        <div class='my_startdatepicker'></div>
+                        <input type='hidden' id='start_date' name='start_date' value="2010-07-01">
+                    </div>
+                </div>
+                <div style="width:50%;">
+                    <div class="form_label" style="height:auto;">
+                        <label for='end_date'> End date </label>
+                    </div>
+                    <div class="form_input" style="height:auto;padding:50px 80px;font-size: 10px;">
+                        <div class='my_enddatepicker'></div>
+                        <input type='hidden' id='end_date' name='end_date' value="2020-06-30">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="height:50px; margin: 0px; display: flex;">
+                <div style="width: 50%;">
+                    <div class="form_label">
+                        <label>Portfolio Assets</label>
+                    </div>
+                </div>
+                <div style="width:50%;">
+                    <div class="form_label">
+                        <label>Weight</label>
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;border-bottom: 1px solid lightgrey;">
+                <input type='hidden' id='row_count' name='row_count' value='1'/>
+                <div id='assets'>
+                    <div class='row_asset' name='row_asset' id='row_asset1' style="display: flex ;">
+                        <div style="width:50%;text-align: center;">
+                            <select id="asset_code1" name="asset_code1" class="asset_select">
+                                <option value='idx1001' selected>코스피</option>
+                                <option value='idx1028'>코스피 200</option>
+                                <option value='idx1034'>코스피 100</option>
+                                <option value='idx1035'>코스피 50</option>
+                                <option value='idx1182'>코스피 200 초대형제외 지수</option>
+                                <option value='idx1150'>코스피 200 커뮤니케이션서비스</option>
+                                <option value='idx1151'>코스피 200 건설</option>
+                                <option value='idx1152'>코스피 200 중공업</option>
+                                <option value='idx1153'>코스피 200 철강/소재</option>
+                                <option value='idx1154'>코스피 200 에너지/화학</option>
+                                <option value='idx1155'>코스피 200 정보기술</option>
+                                <option value='idx1156'>코스피 200 금융</option>
+                                <option value='idx1157'>코스피 200 생활소비재</option>
+                                <option value='idx1158'>코스피 200 경기소비재</option>
+                                <option value='idx1159'>코스피 200 산업재</option>
+                                <option value='idx1160'>코스피 200 헬스케어</option>
+                                <option value='idx1002'>코스피 대형주</option>
+                                <option value='idx1003'>코스피 중형주</option>
+                                <option value='idx1004'>코스피 소형주</option>
+                            </select>
+                        </div>
+                        <div style="display: flex;padding: 0 10px; justify-content: center;">
+                            <input type="text" id="allocation1" name="allocation1" class="asset_select_weight" onchange="weight_change()" required autocomplete="off" value="자산배분비중(%)"  onfocus="clearText(this)" onblur="defaultText(this)">
+                            <p>&nbsp</p>
+                            <input type="text" id="min_weight1" name="min_weight1" class="asset_select_weight" autocomplete="off" value="최소비중(%)" onfocus="clearText(this)" onblur="defaultText(this)">
+                            <p>&nbsp</p>
+                            <input type="text" id="max_weight1" name="max_weight1" class="asset_select_weight" autocomplete="off" value="최대비중(%)" onfocus="clearText(this)" onblur="defaultText(this)">
+                            <p>&nbsp</p>
+                        </div>    
+                    </div>
+                </div>
+                <div style="width:100%;padding-bottom:20px;margin-top:40px;display: flex;justify-content: flex-end;">
+                    <input type='button' id='add_asset' class='btn btn-light' onclick="add_asset_row()" value='Add asset' style="font-size: 20px;font-style: bold;border-radius: 0px;border:0.5px solid #eeeeee">
+                
+                    <input type='button' id='reset_asset' class='btn btn-danger' onclick="delete_rows()" value="Reset" style="font-size: 20px;font-style: bold;border-radius: 0px;border:0.5px solid #eeeeee">
+                </div>
+            </div>
+                    <!--<div class='col-sm-4'>
+                    </div>
+                    <label id='weight_total' class='col-sm-2'>비중 합 :</label>-->
+            <div id='button_box'>
+                <button type='button' id='submit_btn' onclick="showResult()">Optimize</button>
+            </div>
+        </form>
+        </div>
+    <div id="graph_result" style="display: none;">
+        <div id="divReturn" style="display:flex;">
+            <div style="width:50%;margin: 40px 0;">
+                <canvas id='indReturns' height="250"></canvas>
+            </div>
+            <div style="width:50%;margin: 40px 0;">
+                <canvas id='returngraph' height="250"></canvas>
+            </div>
+        </div>
+        <div id="divEf" style="display: flex;height:500px;margin-top:40px;">
+            <div style="width: 70%;">
+                <canvas id='efficient_frontier_graph' style="width: 100%;height: 100%;"></canvas>
+            </div>
+            <div style="width: 30%;">
+                <div class="doughnut" style="height: 50%;">
+                    <div style="height:80%;">
+                        <canvas id="max_doughnut" ></canvas>
+                    </div>
+                    <div class='result_table'>
+                        <h4>Annual return :    <span id='msharp_ret'></span>%</h4>
+                        <h4>Annual volatility :    <span id="msharp_vol"></span>%</h4>
+                    </div>
+                </div>
+                <div class='doughnut' style="height: 50%;">
+                    <div style="height:80%">
+                        <canvas id="gmv_doughnut" ></canvas>
+                    </div>
+                    <div class='result_table'>
+                        <h4>Annual return :    <span id='gmv_ret'></span>%</h4>
+                        <h4>Annual volatility :    <span id="gmv_vol"></span>%</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

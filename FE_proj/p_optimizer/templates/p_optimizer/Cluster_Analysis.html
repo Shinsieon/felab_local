@@ -1,0 +1,1646 @@
+﻿{% extends 'p_optimizer/base.html' %}
+
+{% block content %}
+<haed>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+</haed>
+<header>
+</header>
+
+<div class="container" style="max-width:1500px;">
+    <div class="form-group", style="height:auto;">
+    </div>
+    <div class="form-group" style="height:auto;">
+        <div class="commentBox">
+            <h2>한국노동패널조사의 12차시부터 21차시의 개인용 데이터를 기반으로 모든 차시(10년)에 대하여 응답을 한 인구만을 추려 3번의 클러스터링을 진행하였다.
+            첫 번째와 두 번째 클러스터는 각각 종사상 지위와 직업군을 카테고리로 분류한 특성(변수)를 사용하여 진행하였고 세 번째 클러스터의 경우
+            국민연금가입여부, 정규직인가와 비정규직인가, 종사상지위, 거주지역을 사용하여 다차원 클러스터 분석을 진행하였다.
+            모든 클러스터링 과정은 10년치의 시퀀스 데이터에 대하여 최적일치법을 사용하여 거리 메트릭스를 구하였고 클러스터에는 ward기법을 사용하였다.
+ 
+            </h2>
+        </div>
+        <div class="resultBox">
+            <div class="TableBox">
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-baqh"></th>
+                            <th class="tg-nrix" colspan="5">12차시</th>
+                            <th class="tg-baqh" colspan="5">21차시</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tg-baqh"></td>
+                            <td class="tg-baqh">cluster1</td>
+                            <td class="tg-baqh">cluster2</td>
+                            <td class="tg-baqh">cluster3</td>
+                            <td class="tg-baqh">cluster4</td>
+                            <td class="tg-baqh">cluster5</td>
+                            <td class="tg-baqh">cluster1</td>
+                            <td class="tg-baqh">cluster2</td>
+                            <td class="tg-baqh">cluster3</td>
+                            <td class="tg-baqh">cluster4</td>
+                            <td class="tg-baqh">cluster5</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">규모</td>
+                            <td class="tg-baqh">206</td>
+                            <td class="tg-baqh">1605</td>
+                            <td class="tg-baqh">1042</td>
+                            <td class="tg-baqh">231</td>
+                            <td class="tg-baqh">183</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">성별(남성)</td>
+                            <td class="tg-baqh">0.38</td>
+                            <td class="tg-baqh">0.7</td>
+                            <td class="tg-baqh">0.76</td>
+                            <td class="tg-baqh">0.1</td>
+                            <td class="tg-baqh">0.73</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">평균 만나이</td>
+                            <td class="tg-baqh">47</td>
+                            <td class="tg-baqh">39</td>
+                            <td class="tg-baqh">50</td>
+                            <td class="tg-baqh">52</td>
+                            <td class="tg-baqh">50</td>
+                            <td class="tg-baqh">56</td>
+                            <td class="tg-baqh">48</td>
+                            <td class="tg-baqh">59</td>
+                            <td class="tg-baqh">61</td>
+                            <td class="tg-baqh">59</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">혼인상태</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)미혼</td>
+                            <td class="tg-baqh">25(0.12)</td>
+                            <td class="tg-baqh">275(0.17)</td>
+                            <td class="tg-baqh">60(0.06)</td>
+                            <td class="tg-baqh">2(0.09)</td>
+                            <td class="tg-baqh">12(0.07)</td>
+                            <td class="tg-baqh">16(0.08)</td>
+                            <td class="tg-baqh">118(0.07)</td>
+                            <td class="tg-baqh">38(0.04)</td>
+                            <td class="tg-baqh">2(0.009)</td>
+                            <td class="tg-baqh">8(0.04)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)기혼</td>
+                            <td class="tg-baqh">139(0.67)</td>
+                            <td class="tg-baqh">1255(0.78)</td>
+                            <td class="tg-baqh">878(0.84)</td>
+                            <td class="tg-baqh">225(0.97)</td>
+                            <td class="tg-baqh">143(0.78)</td>
+                            <td class="tg-baqh">135(0.66)</td>
+                            <td class="tg-baqh">1372(0.85)</td>
+                            <td class="tg-baqh">852(0.82)</td>
+                            <td class="tg-baqh">218(0.94)</td>
+                            <td class="tg-baqh">135(0.74)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)별거</td>
+                            <td class="tg-baqh">6(0.02)</td>
+                            <td class="tg-baqh">8(0.004)</td>
+                            <td class="tg-baqh">3(0.003)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">5(0.03)</td>
+                            <td class="tg-baqh">3(0.01)</td>
+                            <td class="tg-baqh">9(0.006)</td>
+                            <td class="tg-baqh">9(0.009)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">7(0.04)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)이혼</td>
+                            <td class="tg-baqh">16(0.08)</td>
+                            <td class="tg-baqh">44(0.03)</td>
+                            <td class="tg-baqh">49(0.05)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">16(0.09)</td>
+                            <td class="tg-baqh">26(0.13)</td>
+                            <td class="tg-baqh">73(0.05)</td>
+                            <td class="tg-baqh">65(0.06)</td>
+                            <td class="tg-baqh">2(0.009)</td>
+                            <td class="tg-baqh">18(0.1)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)사별</td>
+                            <td class="tg-baqh">20(0.1)</td>
+                            <td class="tg-baqh">23(0.01)</td>
+                            <td class="tg-baqh">52(0.05)</td>
+                            <td class="tg-baqh">3(0.01)</td>
+                            <td class="tg-baqh">7(0.04)</td>
+                            <td class="tg-baqh">26(0.13)</td>
+                            <td class="tg-baqh">33(0.02)</td>
+                            <td class="tg-baqh">78(0.07)</td>
+                            <td class="tg-baqh">8(0.03)</td>
+                            <td class="tg-baqh">8(0.08)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">학력</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)대학 이하</td>
+                            <td class="tg-baqh">155(0.75)</td>
+                            <td class="tg-baqh">679(0.42)</td>
+                            <td class="tg-baqh">772(0.74)</td>
+                            <td class="tg-baqh">216(0.94)</td>
+                            <td class="tg-baqh">175(0.96)</td>
+                            <td class="tg-baqh">154(0.75)</td>
+                            <td class="tg-baqh">670(0.42)</td>
+                            <td class="tg-baqh">767(0.74)</td>
+                            <td class="tg-baqh">216(0.94)</td>
+                            <td class="tg-baqh">174(0.96)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)2년제 대학</td>
+                            <td class="tg-baqh">18(0.09)</td>
+                            <td class="tg-baqh">338(0.21)</td>
+                            <td class="tg-baqh">90(0.09)</td>
+                            <td class="tg-baqh">8(0.03)</td>
+                            <td class="tg-baqh">2(0.01)</td>
+                            <td class="tg-baqh">19(0.09)</td>
+                            <td class="tg-baqh">334(0.2)</td>
+                            <td class="tg-baqh">95(0.09)</td>
+                            <td class="tg-baqh">8(0.03)</td>
+                            <td class="tg-baqh">3(0.02)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)4년제 대학</td>
+                            <td class="tg-baqh">28(0.14)</td>
+                            <td class="tg-baqh">483(0.3)</td>
+                            <td class="tg-baqh">157(0.15)</td>
+                            <td class="tg-baqh">5(0.021)</td>
+                            <td class="tg-baqh">6(0.03)</td>
+                            <td class="tg-baqh">26(0.13)</td>
+                            <td class="tg-baqh">474(0.3)</td>
+                            <td class="tg-baqh">153(0.15)</td>
+                            <td class="tg-baqh">5(0.02)</td>
+                            <td class="tg-baqh">6(0.03)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)대학원 석사</td>
+                            <td class="tg-baqh">4(0.02)</td>
+                            <td class="tg-baqh">88(0.05)</td>
+                            <td class="tg-baqh">20(0.02)</td>
+                            <td class="tg-baqh">2(0.009)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">5(0.02)</td>
+                            <td class="tg-baqh">105(0.07)</td>
+                            <td class="tg-baqh">20(0.02)</td>
+                            <td class="tg-baqh">2(0.009)</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)대학원 박사</td>
+                            <td class="tg-baqh">1(0.005)</td>
+                            <td class="tg-baqh">17(0.01)</td>
+                            <td class="tg-baqh">3(0.003)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.01)</td>
+                            <td class="tg-baqh">22(0.01)</td>
+                            <td class="tg-baqh">7(0.007)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">국민연금가입비율</td>
+                            <td class="tg-baqh">0.303</td>
+                            <td class="tg-baqh">0.715</td>
+                            <td class="tg-baqh">0.598</td>
+                            <td class="tg-baqh">0.333</td>
+                            <td class="tg-baqh">0.177</td>
+                            <td class="tg-baqh">0.514</td>
+                            <td class="tg-baqh">0.74</td>
+                            <td class="tg-baqh">0.382</td>
+                            <td class="tg-baqh">0.5</td>
+                            <td class="tg-baqh">0.244</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">정규직 비율</td>
+                            <td class="tg-baqh">0.242</td>
+                            <td class="tg-baqh">0.851</td>
+                            <td class="tg-baqh">0.684</td>
+                            <td class="tg-baqh">0.333</td>
+                            <td class="tg-baqh">0.177</td>
+                            <td class="tg-baqh">0.514</td>
+                            <td class="tg-baqh">0.856</td>
+                            <td class="tg-baqh">0.447</td>
+                            <td class="tg-baqh">0.357</td>
+                            <td class="tg-baqh">0.085</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">거주지역</td>
+                            <td class="tg-baqh" colspan="5">Value</td>
+                            <td class="tg-baqh" colspan="5">Value</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)서울특별시</td>
+                            <td class="tg-baqh">49(0.233)</td>
+                            <td class="tg-baqh">282(0.176)</td>
+                            <td class="tg-baqh">144(0.138)</td>
+                            <td class="tg-baqh">22(0.095)</td>
+                            <td class="tg-baqh">34(0.186)</td>
+                            <td class="tg-baqh">45(0.218)</td>
+                            <td class="tg-baqh">259(0.161)</td>
+                            <td class="tg-baqh">126(0.121)</td>
+                            <td class="tg-baqh">19(0.082)</td>
+                            <td class="tg-baqh">33(0.18)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)부산광역시</td>
+                            <td class="tg-baqh">10(0.049)</td>
+                            <td class="tg-baqh">125(0.078)</td>
+                            <td class="tg-baqh">87(0.083)</td>
+                            <td class="tg-baqh">17(0.074)</td>
+                            <td class="tg-baqh">24(0.131)</td>
+                            <td class="tg-baqh">9(0.044)</td>
+                            <td class="tg-baqh">123(0.077)</td>
+                            <td class="tg-baqh">82(0.079)</td>
+                            <td class="tg-baqh">17(0.074)</td>
+                            <td class="tg-baqh">22(0.12)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)대구광역시</td>
+                            <td class="tg-baqh">11(0.053)</td>
+                            <td class="tg-baqh">77(0.048)</td>
+                            <td class="tg-baqh">50(0.048)</td>
+                            <td class="tg-baqh">7(0.03)</td>
+                            <td class="tg-baqh">6(0.033)</td>
+                            <td class="tg-baqh">12(0.058)</td>
+                            <td class="tg-baqh">76(0.047)</td>
+                            <td class="tg-baqh">50(0.048)</td>
+                            <td class="tg-baqh">7(0.03)</td>
+                            <td class="tg-baqh">6(0.033)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)대전광역시</td>
+                            <td class="tg-baqh">10(0.049)</td>
+                            <td class="tg-baqh">49(0.031)</td>
+                            <td class="tg-baqh">24(0.023)</td>
+                            <td class="tg-baqh">2(0.009)</td>
+                            <td class="tg-baqh">2(0.011)</td>
+                            <td class="tg-baqh">8(0.039)</td>
+                            <td class="tg-baqh">42(0.026)</td>
+                            <td class="tg-baqh">21(0.02)</td>
+                            <td class="tg-baqh">3(0.013)</td>
+                            <td class="tg-baqh">2(0.011)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)인천광역시</td>
+                            <td class="tg-baqh">7(0.034)</td>
+                            <td class="tg-baqh">124(0.077)</td>
+                            <td class="tg-baqh">73(0.07)</td>
+                            <td class="tg-baqh">10(0.043)</td>
+                            <td class="tg-baqh">8(0.044)</td>
+                            <td class="tg-baqh">6(0.029)</td>
+                            <td class="tg-baqh">124(0.077)</td>
+                            <td class="tg-baqh">71(0.068)</td>
+                            <td class="tg-baqh">10(0.043)</td>
+                            <td class="tg-baqh">8(0.044)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(6)광주광역시</td>
+                            <td class="tg-baqh">7(0.034)</td>
+                            <td class="tg-baqh">37(0.023)</td>
+                            <td class="tg-baqh">23(0.022)</td>
+                            <td class="tg-baqh">4(0.017)</td>
+                            <td class="tg-baqh">3(0.016)</td>
+                            <td class="tg-baqh">6(0.029)</td>
+                            <td class="tg-baqh">38(0.024)</td>
+                            <td class="tg-baqh">23(0.022)</td>
+                            <td class="tg-baqh">4(0.017)</td>
+                            <td class="tg-baqh">3(0.016)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(7)울산광역시</td>
+                            <td class="tg-baqh">6(0.029)</td>
+                            <td class="tg-baqh">85(0.053)</td>
+                            <td class="tg-baqh">25(0.024)</td>
+                            <td class="tg-baqh">4(0.017)</td>
+                            <td class="tg-baqh">3(0.016)</td>
+                            <td class="tg-baqh">5(0.024)</td>
+                            <td class="tg-baqh">84(0.052)</td>
+                            <td class="tg-baqh">26(0.025)</td>
+                            <td class="tg-baqh">4(0.017)</td>
+                            <td class="tg-baqh">3(0.016)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(8)경기</td>
+                            <td class="tg-baqh">49(0.238)</td>
+                            <td class="tg-baqh">376(0.234)</td>
+                            <td class="tg-baqh">185(0.178)</td>
+                            <td class="tg-baqh">36(0.156)</td>
+                            <td class="tg-baqh">42(0.23)</td>
+                            <td class="tg-baqh">48(0.233)</td>
+                            <td class="tg-baqh">380(0.237)</td>
+                            <td class="tg-baqh">202(0.194)</td>
+                            <td class="tg-baqh">38(0.165)</td>
+                            <td class="tg-baqh">41(0.224)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(9)강원</td>
+                            <td class="tg-baqh">5(0.024)</td>
+                            <td class="tg-baqh">29(0.018)</td>
+                            <td class="tg-baqh">38(0.036)</td>
+                            <td class="tg-baqh">13(0.056)</td>
+                            <td class="tg-baqh">3(0.016)</td>
+                            <td class="tg-baqh">5(0.024)</td>
+                            <td class="tg-baqh">35(0.022)</td>
+                            <td class="tg-baqh">37(0.036)</td>
+                            <td class="tg-baqh">13(0.056)</td>
+                            <td class="tg-baqh">3(0.016)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(10)충북</td>
+                            <td class="tg-baqh">8(0.039)</td>
+                            <td class="tg-baqh">52(0.032)</td>
+                            <td class="tg-baqh">43(0.041)</td>
+                            <td class="tg-baqh">9(0.039)</td>
+                            <td class="tg-baqh">9(0.049)</td>
+                            <td class="tg-baqh">8(0.039)</td>
+                            <td class="tg-baqh">54(0.034)</td>
+                            <td class="tg-baqh">42(0.04)</td>
+                            <td class="tg-baqh">8(0.035)</td>
+                            <td class="tg-baqh">9(0.049)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(11)충남</td>
+                            <td class="tg-baqh">7(0.034)</td>
+                            <td class="tg-baqh">60(0.037)</td>
+                            <td class="tg-baqh">67(0.064)</td>
+                            <td class="tg-baqh">28(0.121)</td>
+                            <td class="tg-baqh">9(0.049)</td>
+                            <td class="tg-baqh">8(0.039)</td>
+                            <td class="tg-baqh">69(0.043)</td>
+                            <td class="tg-baqh">65(0.062)</td>
+                            <td class="tg-baqh">28(0.121)</td>
+                            <td class="tg-baqh">9(0.049)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(12)전북</td>
+                            <td class="tg-baqh">14(0.068)</td>
+                            <td class="tg-baqh">52(0.032)</td>
+                            <td class="tg-baqh">55(0.053)</td>
+                            <td class="tg-baqh">15(0.065)</td>
+                            <td class="tg-baqh">11(0.06)</td>
+                            <td class="tg-baqh">15(0.073)</td>
+                            <td class="tg-baqh">53(0.033)</td>
+                            <td class="tg-baqh">59(0.057)</td>
+                            <td class="tg-baqh">15(0.065)</td>
+                            <td class="tg-baqh">12(0.066)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(13)전남</td>
+                            <td class="tg-baqh">8(0.039)</td>
+                            <td class="tg-baqh">38(0.024)</td>
+                            <td class="tg-baqh">70(0.067)</td>
+                            <td class="tg-baqh">22(0.095)</td>
+                            <td class="tg-baqh">10(0.055)</td>
+                            <td class="tg-baqh">9(0.044)</td>
+                            <td class="tg-baqh">38(0.024)</td>
+                            <td class="tg-baqh">71(0.068)</td>
+                            <td class="tg-baqh">23(0.1)</td>
+                            <td class="tg-baqh">11(0.06)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(14)경북</td>
+                            <td class="tg-baqh">11(0.053)</td>
+                            <td class="tg-baqh">68(0.042)</td>
+                            <td class="tg-baqh">58(0.056)</td>
+                            <td class="tg-baqh">19(0.082)</td>
+                            <td class="tg-baqh">5(0.027)</td>
+                            <td class="tg-baqh">12(0.058)</td>
+                            <td class="tg-baqh">62(0.039)</td>
+                            <td class="tg-baqh">59(0.057)</td>
+                            <td class="tg-baqh">19(0.082)</td>
+                            <td class="tg-baqh">5(0.027)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(15)경남</td>
+                            <td class="tg-baqh">7(0.034)</td>
+                            <td class="tg-baqh">143(0.089)</td>
+                            <td class="tg-baqh">92(0.088)</td>
+                            <td class="tg-baqh">17(0.074)</td>
+                            <td class="tg-baqh">13(0.071)</td>
+                            <td class="tg-baqh">8(0.039)</td>
+                            <td class="tg-baqh">147(0.092)</td>
+                            <td class="tg-baqh">94(0.09)</td>
+                            <td class="tg-baqh">17(0.074)</td>
+                            <td class="tg-baqh">15(0.082)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(16)제주도</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">8(0.005)</td>
+                            <td class="tg-baqh">8(0.008)</td>
+                            <td class="tg-baqh">6(0.026)</td>
+                            <td class="tg-baqh">1(0.005)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">8(0.005)</td>
+                            <td class="tg-baqh">8(0.008)</td>
+                            <td class="tg-baqh">6(0.026)</td>
+                            <td class="tg-baqh">1(0.005)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(17)이북</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(18)외국</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(19)세종</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.01)</td>
+                            <td class="tg-baqh">13(0.008)</td>
+                            <td class="tg-baqh">6(0.006)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="visualBox">
+                <div class="cluster-size">
+                    <canvas id="jongsa_sizeChart" width="300px" height="300px"></canvas>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column">
+                    <canvas id="jongsa_barChart"></canvas>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="jongsa_ratio_radio" id="jongsa_ratio_radio12" class="yearradio" /><label for="jongsa_ratio_radio12">12차시</label>
+                        <input type="radio" name="jongsa_ratio_radio" id="jongsa_ratio_radio21" class="yearradio" /><label for="jongsa_ratio_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <div style="display:flex; justify-content:center" ">
+                        <canvas id="jongsa_marriageChart" width="250px" height="250px"></canvas>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <button class="jongsa_otherbtn-marr" value="Cluster1">View Cluster1</button>
+                            <button class="jongsa_otherbtn-marr" value="Cluster2">View Cluster2</button>
+                            <button class="jongsa_otherbtn-marr" value="Cluster3">View Cluster3</button>
+                            <button class="jongsa_otherbtn-marr" value="Cluster4">View Cluster4</button>
+                            <button class="jongsa_otherbtn-marr" value="Cluster5">View Cluster5</button>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="jongsa_marriage_radio" id="jongsa_marriage_radio12" class="yearradio" /><label for="jongsa_marriage_radio12">12차시</label>
+                        <input type="radio" name="jongsa_marriage_radio" id="jongsa_marriage_radio21" class="yearradio" /><label for="jongsa_marriage_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column">
+                    <canvas id="jongsa_barChart_edu"></canvas>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="jongsa_edu_radio" id="jongsa_edu_radio12" class="yearradio" /><label for="jongsa_edu_radio12">12차시</label>
+                        <input type="radio" name="jongsa_edu_radio" id="jongsa_edu_radio21" class="yearradio" /><label for="jongsa_edu_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <div style="display:flex; justify-content:center" ">
+                        <canvas id="jongsa_stayChart" width="250px" height="250px"></canvas>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <button class="jongsa_otherbtn-stay" value="Cluster1">View Cluster1</button>
+                            <button class="jongsa_otherbtn-stay" value="Cluster2">View Cluster2</button>
+                            <button class="jongsa_otherbtn-stay" value="Cluster3">View Cluster3</button>
+                            <button class="jongsa_otherbtn-stay" value="Cluster4">View Cluster4</button>
+                            <button class="jongsa_otherbtn-stay" value="Cluster5">View Cluster5</button>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="jongsa_stay_radio" id="jongsa_stay_radio12" class="yearradio" /><label for="jongsa_stay_radio12">12차시</label>
+                        <input type="radio" name="jongsa_stay_radio" id="jongsa_stay_radio21" class="yearradio" /><label for="jongsa_stay_radio21">21차시</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="commentBox">
+        </div>
+        <div class="resultBox">
+            <div class="TableBox">
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-baqh"></th>
+                            <th class="tg-nrix" colspan="5">12차시</th>
+                            <th class="tg-baqh" colspan="5">21차시</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tg-baqh"></td>
+                            <td class="tg-baqh">cluster1</td>
+                            <td class="tg-baqh">cluster2</td>
+                            <td class="tg-baqh">cluster3</td>
+                            <td class="tg-baqh">cluster4</td>
+                            <td class="tg-baqh">cluster5</td>
+                            <td class="tg-baqh">cluster1</td>
+                            <td class="tg-baqh">cluster2</td>
+                            <td class="tg-baqh">cluster3</td>
+                            <td class="tg-baqh">cluster4</td>
+                            <td class="tg-baqh">cluster5</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">규모</td>
+                            <td class="tg-baqh">1041</td>
+                            <td class="tg-baqh">2191</td>
+                            <td class="tg-baqh">1418</td>
+                            <td class="tg-baqh">3486</td>
+                            <td class="tg-baqh">362</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">성별(남성)</td>
+                            <td class="tg-baqh">0.54</td>
+                            <td class="tg-baqh">0.65</td>
+                            <td class="tg-baqh">0.69</td>
+                            <td class="tg-baqh">0.22</td>
+                            <td class="tg-baqh">0.11</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">평균 만나이</td>
+                            <td class="tg-baqh">47</td>
+                            <td class="tg-baqh">38</td>
+                            <td class="tg-baqh">52</td>
+                            <td class="tg-baqh">53</td>
+                            <td class="tg-baqh">52</td>
+                            <td class="tg-baqh">56</td>
+                            <td class="tg-baqh">47</td>
+                            <td class="tg-baqh">61</td>
+                            <td class="tg-baqh">62</td>
+                            <td class="tg-baqh">51</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">혼인상태</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)미혼</td>
+                            <td class="tg-baqh">130(0.12)</td>
+                            <td class="tg-baqh">530(0.24)</td>
+                            <td class="tg-baqh">74(0.05)</td>
+                            <td class="tg-baqh">347(0.1)</td>
+                            <td class="tg-baqh">5(0.01)</td>
+                            <td class="tg-baqh">89(0.09)</td>
+                            <td class="tg-baqh">260(0.12)</td>
+                            <td class="tg-baqh">49(0.03)</td>
+                            <td class="tg-baqh">24(0.07)</td>
+                            <td class="tg-baqh">2(0.006)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)기혼</td>
+                            <td class="tg-baqh">769(0.74)</td>
+                            <td class="tg-baqh">1551(0.7)</td>
+                            <td class="tg-baqh">1175(0.83)</td>
+                            <td class="tg-baqh">2496(0.72)</td>
+                            <td class="tg-baqh">349(0.97)</td>
+                            <td class="tg-baqh">749(0.72)</td>
+                            <td class="tg-baqh">1764(0.8)</td>
+                            <td class="tg-baqh">1124(0.8)</td>
+                            <td class="tg-baqh">2364(0.68)</td>
+                            <td class="tg-baqh">338(0.93)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)별거</td>
+                            <td class="tg-baqh">23(0.02)</td>
+                            <td class="tg-baqh">11(0.005)</td>
+                            <td class="tg-baqh">6(0.004)</td>
+                            <td class="tg-baqh">20(0.01)</td>
+                            <td class="tg-baqh">1(0.003)</td>
+                            <td class="tg-baqh">19(0.02)</td>
+                            <td class="tg-baqh">13(0.006)</td>
+                            <td class="tg-baqh">13(0.009)</td>
+                            <td class="tg-baqh">12(0.003)</td>
+                            <td class="tg-baqh">1(0.003)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)이혼</td>
+                            <td class="tg-baqh">68(0.07)</td>
+                            <td class="tg-baqh">64(0.03)</td>
+                            <td class="tg-baqh">58(0.04)</td>
+                            <td class="tg-baqh">113(0.03)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">100(0.1)</td>
+                            <td class="tg-baqh">109(0.05)</td>
+                            <td class="tg-baqh">77(0.05)</td>
+                            <td class="tg-baqh">142(0.04)</td>
+                            <td class="tg-baqh">2(0.006)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)사별</td>
+                            <td class="tg-baqh">51(0.05)</td>
+                            <td class="tg-baqh">35(0.02)</td>
+                            <td class="tg-baqh">105(0.07)</td>
+                            <td class="tg-baqh">510(0.15)</td>
+                            <td class="tg-baqh">7(0.02)</td>
+                            <td class="tg-baqh">84(0.08)</td>
+                            <td class="tg-baqh">45(0.02)</td>
+                            <td class="tg-baqh">155(0.1)</td>
+                            <td class="tg-baqh">727(0.21)</td>
+                            <td class="tg-baqh">19(0.05)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">학력</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)대학 이하</td>
+                            <td class="tg-baqh">841(0.8)</td>
+                            <td class="tg-baqh">905(0.41)</td>
+                            <td class="tg-baqh">1080(0.76)</td>
+                            <td class="tg-baqh">2757(0.8)</td>
+                            <td class="tg-baqh">320(0.88)</td>
+                            <td class="tg-baqh">831(0.8)</td>
+                            <td class="tg-baqh">862(0.4)</td>
+                            <td class="tg-baqh">1072(0.76)</td>
+                            <td class="tg-baqh">2583(0.74)</td>
+                            <td class="tg-baqh">319(0.88)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)2년제 대학</td>
+                            <td class="tg-baqh">97(0.09)</td>
+                            <td class="tg-baqh">464(0.21)</td>
+                            <td class="tg-baqh">108(0.08)</td>
+                            <td class="tg-baqh">281(0.08)</td>
+                            <td class="tg-baqh">20(0.06)</td>
+                            <td class="tg-baqh">99(0.1)</td>
+                            <td class="tg-baqh">482(0.32)</td>
+                            <td class="tg-baqh">114(0.08)</td>
+                            <td class="tg-baqh">299(0.09)</td>
+                            <td class="tg-baqh">21(0.06)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)4년제 대학</td>
+                            <td class="tg-baqh">91(0.09)</td>
+                            <td class="tg-baqh">694(0.24)</td>
+                            <td class="tg-baqh">207(0.15)</td>
+                            <td class="tg-baqh">408(0.12)</td>
+                            <td class="tg-baqh">20(0.06)</td>
+                            <td class="tg-baqh">90(0.09)</td>
+                            <td class="tg-baqh">696(0.32)</td>
+                            <td class="tg-baqh">205(0.15)</td>
+                            <td class="tg-baqh">483(0.14)</td>
+                            <td class="tg-baqh">19(0.05)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)대학원 석사</td>
+                            <td class="tg-baqh">11(0.01)</td>
+                            <td class="tg-baqh">108(0.05)</td>
+                            <td class="tg-baqh">20(0.01)</td>
+                            <td class="tg-baqh">37(0.01)</td>
+                            <td class="tg-baqh">2(0.006)/td>
+                            <td class="tg-baqh">19(0.02)</td>
+                            <td class="tg-baqh">121(0.06)</td>
+                            <td class="tg-baqh">22(0.02)</td>
+                            <td class="tg-baqh">51(0.02)</td>
+                            <td class="tg-baqh">3(0.008)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)대학원 박사</td>
+                            <td class="tg-baqh">1(0.001)</td>
+                            <td class="tg-baqh">20(0.009)</td>
+                            <td class="tg-baqh">3(0.002)</td>
+                            <td class="tg-baqh">3(0.001)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.002)</td>
+                            <td class="tg-baqh">30(0.01)</td>
+                            <td class="tg-baqh">5(0.004)</td>
+                            <td class="tg-baqh">70(0.002)</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">국민연금가입비율</td>
+                            <td class="tg-baqh">0.408</td>
+                            <td class="tg-baqh">0.728</td>
+                            <td class="tg-baqh">0.382</td>
+                            <td class="tg-baqh">0.401</td>
+                            <td class="tg-baqh">0.523</td>
+                            <td class="tg-baqh">0.435</td>
+                            <td class="tg-baqh">0.766</td>
+                            <td class="tg-baqh">0.282</td>
+                            <td class="tg-baqh">0.378</td>
+                            <td class="tg-baqh">0.414</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">정규직 비율</td>
+                            <td class="tg-baqh">0.408</td>
+                            <td class="tg-baqh">0.902</td>
+                            <td class="tg-baqh">0.382</td>
+                            <td class="tg-baqh">0.391</td>
+                            <td class="tg-baqh">0.523</td>
+                            <td class="tg-baqh">0.1</td>
+                            <td class="tg-baqh">0.94</td>
+                            <td class="tg-baqh">0.242</td>
+                            <td class="tg-baqh">0.196</td>
+                            <td class="tg-baqh">0.345</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">거주지역</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)서울특별시</td>
+                            <td class="tg-baqh">191(0.183)</td>
+                            <td class="tg-baqh">398(0.181)</td>
+                            <td class="tg-baqh">205(0.144)</td>
+                            <td class="tg-baqh">690(0.197)</td>
+                            <td class="tg-baqh">35(0.096)</td>
+                            <td class="tg-baqh">179(0.171)</td>
+                            <td class="tg-baqh">359(0.163)</td>
+                            <td class="tg-baqh">178(0.126)</td>
+                            <td class="tg-baqh">617(0.176)</td>
+                            <td class="tg-baqh">28(0.077)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)부산광역시</td>
+                            <td class="tg-baqh">83(0.08)</td>
+                            <td class="tg-baqh">192(0.087)</td>
+                            <td class="tg-baqh">115(0.081)</td>
+                            <td class="tg-baqh">345(0.098)</td>
+                            <td class="tg-baqh">20(0.055)</td>
+                            <td class="tg-baqh">83(0.079)</td>
+                            <td class="tg-baqh">177(0.08)</td>
+                            <td class="tg-baqh">112(0.078)</td>
+                            <td class="tg-baqh">329(0.094)</td>
+                            <td class="tg-baqh">20(0.055)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)대구광역시</td>
+                            <td class="tg-baqh">49(0.047)</td>
+                            <td class="tg-baqh">107(0.048)</td>
+                            <td class="tg-baqh">61(0.043)</td>
+                            <td class="tg-baqh">176(0.05)</td>
+                            <td class="tg-baqh">11(0.03)</td>
+                            <td class="tg-baqh">47(0.045)</td>
+                            <td class="tg-baqh">106(0.048)</td>
+                            <td class="tg-baqh">58(0.409)</td>
+                            <td class="tg-baqh">176(0.05)</td>
+                            <td class="tg-baqh">10(0.028)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)대전광역시</td>
+                            <td class="tg-baqh">32(0.03)</td>
+                            <td class="tg-baqh">70(0.031)</td>
+                            <td class="tg-baqh">41(0.028)</td>
+                            <td class="tg-baqh">89(0.025)</td>
+                            <td class="tg-baqh">9(0.041)</td>
+                            <td class="tg-baqh">31(0.029)</td>
+                            <td class="tg-baqh">62(0.028)</td>
+                            <td class="tg-baqh">36(0.253)</td>
+                            <td class="tg-baqh">89(0.026)</td>
+                            <td class="tg-baqh">7(0.019)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)인천광역시</td>
+                            <td class="tg-baqh">59(0.056)</td>
+                            <td class="tg-baqh">186(0.084)</td>
+                            <td class="tg-baqh">78(0.055)</td>
+                            <td class="tg-baqh">190(0.054)</td>
+                            <td class="tg-baqh">17(0.046)</td>
+                            <td class="tg-baqh">59(0.056)</td>
+                            <td class="tg-baqh">181(0.082)</td>
+                            <td class="tg-baqh">78(0.055)</td>
+                            <td class="tg-baqh">194(0.056)</td>
+                            <td class="tg-baqh">17(0.047)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(6)광주광역시</td>
+                            <td class="tg-baqh">23(0.022)</td>
+                            <td class="tg-baqh">50(0.022)</td>
+                            <td class="tg-baqh">28(0.019)</td>
+                            <td class="tg-baqh">94(0.026)</td>
+                            <td class="tg-baqh">7(0.019)</td>
+                            <td class="tg-baqh">25(0.024)</td>
+                            <td class="tg-baqh">49(0.223)</td>
+                            <td class="tg-baqh">27(0.019)</td>
+                            <td class="tg-baqh">97(0.028)</td>
+                            <td class="tg-baqh">7(0.019)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(7)울산광역시</td>
+                            <td class="tg-baqh">33(0.031)</td>
+                            <td class="tg-baqh">108(0.049)</td>
+                            <td class="tg-baqh">38(0.026)</td>
+                            <td class="tg-baqh">87(0.024)</td>
+                            <td class="tg-baqh">6(0.016)</td>
+                            <td class="tg-baqh">32(0.03)</td>
+                            <td class="tg-baqh">102(0.046)</td>
+                            <td class="tg-baqh">39(0.0276)</td>
+                            <td class="tg-baqh">86(0.025)</td>
+                            <td class="tg-baqh">6(0.017)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(8)경기</td>
+                            <td class="tg-baqh">238(0.228)</td>
+                            <td class="tg-baqh">486(0.221)</td>
+                            <td class="tg-baqh">256(0.18)</td>
+                            <td class="tg-baqh">703(0.201)</td>
+                            <td class="tg-baqh">59(0.162)</td>
+                            <td class="tg-baqh">243(0.233)</td>
+                            <td class="tg-baqh">524(0.239)</td>
+                            <td class="tg-baqh">277(0.195)</td>
+                            <td class="tg-baqh">749(0.215)</td>
+                            <td class="tg-baqh">61(0.169)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(9)강원</td>
+                            <td class="tg-baqh">21(0.02)</td>
+                            <td class="tg-baqh">38(0.017)</td>
+                            <td class="tg-baqh">46(0.032)</td>
+                            <td class="tg-baqh">120(0.034)</td>
+                            <td class="tg-baqh">15(0.041)</td>
+                            <td class="tg-baqh">22(0.021)</td>
+                            <td class="tg-baqh">44(0.02)</td>
+                            <td class="tg-baqh">46(0.032)</td>
+                            <td class="tg-baqh">127(0.036)</td>
+                            <td class="tg-baqh">15(0.041)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(10)충북</td>
+                            <td class="tg-baqh">45(0.043)</td>
+                            <td class="tg-baqh">65(0.029)</td>
+                            <td class="tg-baqh">53(0.037)</td>
+                            <td class="tg-baqh">127(0.036)</td>
+                            <td class="tg-baqh">20(0.055)</td>
+                            <td class="tg-baqh">43(0.041)</td>
+                            <td class="tg-baqh">66(0.03)</td>
+                            <td class="tg-baqh">52(0.036)</td>
+                            <td class="tg-baqh">126(0.036)</td>
+                            <td class="tg-baqh">18(0.05)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(11)충남</td>
+                            <td class="tg-baqh">59(0.056)</td>
+                            <td class="tg-baqh">80(0.037)</td>
+                            <td class="tg-baqh">89(0.062)</td>
+                            <td class="tg-baqh">127(0.036)</td>
+                            <td class="tg-baqh">30(0.082)</td>
+                            <td class="tg-baqh">61(0.058)</td>
+                            <td class="tg-baqh">90(0.041)</td>
+                            <td class="tg-baqh">87(0.061)</td>
+                            <td class="tg-baqh">127(0.036)</td>
+                            <td class="tg-baqh">35(0.096)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(12)전북</td>
+                            <td class="tg-baqh">46(0.441)</td>
+                            <td class="tg-baqh">65(0.029)</td>
+                            <td class="tg-baqh">73(0.051)</td>
+                            <td class="tg-baqh">152(0.043)</td>
+                            <td class="tg-baqh">25(0.069)</td>
+                            <td class="tg-baqh">50(0.048)</td>
+                            <td class="tg-baqh">60(0.027)</td>
+                            <td class="tg-baqh">76(0.053)</td>
+                            <td class="tg-baqh">151(0.043)</td>
+                            <td class="tg-baqh">28(0.077)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(13)전남</td>
+                            <td class="tg-baqh">33(0.031)</td>
+                            <td class="tg-baqh">53(0.024)</td>
+                            <td class="tg-baqh">103(0.072)</td>
+                            <td class="tg-baqh">112(0.032)</td>
+                            <td class="tg-baqh">34(0.093)</td>
+                            <td class="tg-baqh">35(0.033)</td>
+                            <td class="tg-baqh">56(0.025)</td>
+                            <td class="tg-baqh">106(0.074)</td>
+                            <td class="tg-baqh">113(0.032)</td>
+                            <td class="tg-baqh">35(0.097)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(14)경북</td>
+                            <td class="tg-baqh">46(0.441)</td>
+                            <td class="tg-baqh">87(0.039)</td>
+                            <td class="tg-baqh">89(0.062)</td>
+                            <td class="tg-baqh">182(0.052)</td>
+                            <td class="tg-baqh">32(0.088)</td>
+                            <td class="tg-baqh">44(0.042)</td>
+                            <td class="tg-baqh">76(0.034)</td>
+                            <td class="tg-baqh">94(0.066)</td>
+                            <td class="tg-baqh">179(0.051)</td>
+                            <td class="tg-baqh">32(0.088)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(15)경남</td>
+                            <td class="tg-baqh">78(0.074)</td>
+                            <td class="tg-baqh">200(0.091)</td>
+                            <td class="tg-baqh">126(0.088)</td>
+                            <td class="tg-baqh">274(0.078)</td>
+                            <td class="tg-baqh">34(0.093)</td>
+                            <td class="tg-baqh">80(0.076)</td>
+                            <td class="tg-baqh">216(0.098)</td>
+                            <td class="tg-baqh">130(0.091)</td>
+                            <td class="tg-baqh">290(0.083)</td>
+                            <td class="tg-baqh">34(0.096)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(16)제주도</td>
+                            <td class="tg-baqh">5(0.004)</td>
+                            <td class="tg-baqh">6(0.002)</td>
+                            <td class="tg-baqh">17(0.011)</td>
+                            <td class="tg-baqh">18(0.005)</td>
+                            <td class="tg-baqh">8(0.022)</td>
+                            <td class="tg-baqh">5(0.004)</td>
+                            <td class="tg-baqh">7(0.003)</td>
+                            <td class="tg-baqh">16(0.112)</td>
+                            <td class="tg-baqh">21(0.006)</td>
+                            <td class="tg-baqh">8(0.022)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(17)이북</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(18)외국</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(19)세종</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.002)</td>
+                            <td class="tg-baqh">16(0.007)</td>
+                            <td class="tg-baqh">6(0.004)</td>
+                            <td class="tg-baqh">15(0.004)</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="visualBox">
+                <div class="cluster-size">
+                    <canvas id="job_sizeChart" width="300px" height="300px"></canvas>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column">
+                    <canvas id="job_barChart"></canvas>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="job_ratio_radio" id="job_ratio_radio12" class="yearradio" /><label for="job_ratio_radio12">12차시</label>
+                        <input type="radio" name="job_ratio_radio" id="job_ratio_radio21" class="yearradio" /><label for="job_ratio_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <div style="display:flex; justify-content:center" ">
+                        <canvas id="job_marriageChart" width="250px" height="250px"></canvas>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <button class="job_otherbtn-marr" value="Cluster1">View Cluster1</button>
+                            <button class="job_otherbtn-marr" value="Cluster2">View Cluster2</button>
+                            <button class="job_otherbtn-marr" value="Cluster3">View Cluster3</button>
+                            <button class="job_otherbtn-marr" value="Cluster4">View Cluster4</button>
+                            <button class="job_otherbtn-marr" value="Cluster5">View Cluster5</button>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="job_marriage_radio" id="job_marriage_radio12" class="yearradio" /><label for="job_marriage_radio12">12차시</label>
+                        <input type="radio" name="job_marriage_radio" id="job_marriage_radio21" class="yearradio" /><label for="job_marriage_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <canvas id="job_barChart_edu"></canvas>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="job_edu_radio" id="job_edu_radio12" class="yearradio" /><label for="job_edu_radio12">12차시</label>
+                        <input type="radio" name="job_edu_radio" id="job_edu_radio21" class="yearradio" /><label for="job_edu_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <div style="display:flex; justify-content:center" ">
+                        <canvas id="job_stayChart" width="250px" height="250px"></canvas>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <button class="job_otherbtn-stay" value="Cluster1">View Cluster1</button>
+                            <button class="job_otherbtn-stay" value="Cluster2">View Cluster2</button>
+                            <button class="job_otherbtn-stay" value="Cluster3">View Cluster3</button>
+                            <button class="job_otherbtn-stay" value="Cluster4">View Cluster4</button>
+                            <button class="job_otherbtn-stay" value="Cluster5">View Cluster5</button>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="job_stay_radio" id="job_stay_radio12" class="yearradio" /><label for="job_stay_radio12">12차시</label>
+                        <input type="radio" name="job_stay_radio" id="job_stay_radio21" class="yearradio" /><label for="job_stay_radio21">21차시</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="commentBox">
+            What is Lorem Ipsum?
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+        </div>
+        <div class="resultBox">
+            <div class="TableBox">
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-baqh"></th>
+                            <th class="tg-nrix" colspan="5">12차시</th>
+                            <th class="tg-baqh" colspan="5">21차시</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tg-baqh"></td>
+                            <td class="tg-baqh">cluster1</td>
+                            <td class="tg-baqh">cluster2</td>
+                            <td class="tg-baqh">cluster3</td>
+                            <td class="tg-baqh">cluster4</td>
+                            <td class="tg-baqh">cluster5</td>
+                            <td class="tg-baqh">cluster1</td>
+                            <td class="tg-baqh">cluster2</td>
+                            <td class="tg-baqh">cluster3</td>
+                            <td class="tg-baqh">cluster4</td>
+                            <td class="tg-baqh">cluster5</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">규모</td>
+                            <td class="tg-baqh">263</td>
+                            <td class="tg-baqh">907</td>
+                            <td class="tg-baqh">142</td>
+                            <td class="tg-baqh">258</td>
+                            <td class="tg-baqh">139</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">성별(남성)</td>
+                            <td class="tg-baqh">0.479</td>
+                            <td class="tg-baqh">0.709</td>
+                            <td class="tg-baqh">0.62</td>
+                            <td class="tg-baqh">0.767</td>
+                            <td class="tg-baqh">0.741</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                            <td class="tg-baqh">-</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">평균 만나이</td>
+                            <td class="tg-baqh">47</td>
+                            <td class="tg-baqh">39</td>
+                            <td class="tg-baqh">39</td>
+                            <td class="tg-baqh">39</td>
+                            <td class="tg-baqh">51</td>
+                            <td class="tg-baqh">56</td>
+                            <td class="tg-baqh">48</td>
+                            <td class="tg-baqh">48</td>
+                            <td class="tg-baqh">48</td>
+                            <td class="tg-baqh">60</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">혼인상태</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)미혼</td>
+                            <td class="tg-baqh">30(0.114)</td>
+                            <td class="tg-baqh">147(0.162)</td>
+                            <td class="tg-baqh">23(0.162)</td>
+                            <td class="tg-baqh">44(0.171)</td>
+                            <td class="tg-baqh">8(0.058)</td>
+                            <td class="tg-baqh">19(0.072)</td>
+                            <td class="tg-baqh">64(0.071)</td>
+                            <td class="tg-baqh">5(0.035)</td>
+                            <td class="tg-baqh">16(0.062)</td>
+                            <td class="tg-baqh">8(0.058)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)기혼</td>
+                            <td class="tg-baqh">199(0.76)</td>
+                            <td class="tg-baqh">719(0.793)</td>
+                            <td class="tg-baqh">113(0.8)</td>
+                            <td class="tg-baqh">202(0.78)</td>
+                            <td class="tg-baqh">106(0.76)</td>
+                            <td class="tg-baqh">192(0.73)</td>
+                            <td class="tg-baqh">780(0.86)</td>
+                            <td class="tg-baqh">130(0.92)</td>
+                            <td class="tg-baqh">223(0.86)</td>
+                            <td class="tg-baqh">101(0.727)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)별거</td>
+                            <td class="tg-baqh">7(0.027)</td>
+                            <td class="tg-baqh">5(0.006)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">5(0.036)</td>
+                            <td class="tg-baqh">4(0.015)</td>
+                            <td class="tg-baqh">6(0.007)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">6(0.043)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)이혼</td>
+                            <td class="tg-baqh">13(0.049)</td>
+                            <td class="tg-baqh">23(0.025)</td>
+                            <td class="tg-baqh">3(0.021)</td>
+                            <td class="tg-baqh">5(0.019)</td>
+                            <td class="tg-baqh">8(0.058)</td>
+                            <td class="tg-baqh">21(0.08)</td>
+                            <td class="tg-baqh">20(0.022)</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                            <td class="tg-baqh">7(0.027)</td>
+                            <td class="tg-baqh">13(0.094)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)사별</td>
+                            <td class="tg-baqh">14(0.053)</td>
+                            <td class="tg-baqh">13(0.014)</td>
+                            <td class="tg-baqh">3(0.021)</td>
+                            <td class="tg-baqh">5(0.019)</td>
+                            <td class="tg-baqh">8(0.058)</td>
+                            <td class="tg-baqh">21(0.08)</td>
+                            <td class="tg-baqh">20(0.022)</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                            <td class="tg-baqh">7(0.027)</td>
+                            <td class="tg-baqh">13(0.094)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">학력</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)대학 이하</td>
+                            <td class="tg-baqh">214(0.814)</td>
+                            <td class="tg-baqh">358(0.395)</td>
+                            <td class="tg-baqh">34(0.239)</td>
+                            <td class="tg-baqh">109(0.422)</td>
+                            <td class="tg-baqh">135(0.971)</td>
+                            <td class="tg-baqh">214(0.814)</td>
+                            <td class="tg-baqh">354(0.39)</td>
+                            <td class="tg-baqh">32(0.225)</td>
+                            <td class="tg-baqh">107(0.415)</td>
+                            <td class="tg-baqh">135(0.971)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)2년제 대학</td>
+                            <td class="tg-baqh">19(0.072)</td>
+                            <td class="tg-baqh">217(0.239)</td>
+                            <td class="tg-baqh">16(0.113)</td>
+                            <td class="tg-baqh">53(0.205)</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                            <td class="tg-baqh">19(0.072)</td>
+                            <td class="tg-baqh">217(0.239)</td>
+                            <td class="tg-baqh">16(0.113)</td>
+                            <td class="tg-baqh">51(0.198)</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)4년제 대학</td>
+                            <td class="tg-baqh">25(0.095)</td>
+                            <td class="tg-baqh">274(0.302)</td>
+                            <td class="tg-baqh">74(0.521)</td>
+                            <td class="tg-baqh">73(0.283)</td>
+                            <td class="tg-baqh">3(0.022)</td>
+                            <td class="tg-baqh">23(0.087)</td>
+                            <td class="tg-baqh">269(0.297)</td>
+                            <td class="tg-baqh">72(0.507)</td>
+                            <td class="tg-baqh">73(0.283)</td>
+                            <td class="tg-baqh">3(0.022)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)대학원 석사</td>
+                            <td class="tg-baqh">5(0.019)</td>
+                            <td class="tg-baqh">48(0.053)</td>
+                            <td class="tg-baqh">15(0.106)</td>
+                            <td class="tg-baqh">19(0.074)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">6(0.023)</td>
+                            <td class="tg-baqh">55(0.061)</td>
+                            <td class="tg-baqh">18(0.127)</td>
+                            <td class="tg-baqh">21(0.081)</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)대학원 박사</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">10(0.011)</td>
+                            <td class="tg-baqh">3(0.021)</td>
+                            <td class="tg-baqh">4(0.016)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">12(0.013)</td>
+                            <td class="tg-baqh">4(0.028)</td>
+                            <td class="tg-baqh">6(0.023)</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">국민연금가입비율</td>
+                            <td class="tg-baqh">0.373</td>
+                            <td class="tg-baqh">0.795</td>
+                            <td class="tg-baqh">0.148</td>
+                            <td class="tg-baqh">0.876</td>
+                            <td class="tg-baqh">0.115</td>
+                            <td class="tg-baqh">0.513</td>
+                            <td class="tg-baqh">0.811</td>
+                            <td class="tg-baqh">0.099</td>
+                            <td class="tg-baqh">0.95</td>
+                            <td class="tg-baqh">0.18</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">정규직 비율</td>
+                            <td class="tg-baqh">0.262</td>
+                            <td class="tg-baqh">0.9</td>
+                            <td class="tg-baqh">0.937</td>
+                            <td class="tg-baqh">0.86</td>
+                            <td class="tg-baqh">0.072</td>
+                            <td class="tg-baqh">0.118</td>
+                            <td class="tg-baqh">0.929</td>
+                            <td class="tg-baqh">0.951</td>
+                            <td class="tg-baqh">0.899</td>
+                            <td class="tg-baqh">0.029</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">거주지역</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                            <td class="tg-baqh" colspan="5">Value(Ratio)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(1)서울특별시</td>
+                            <td class="tg-baqh">68(0.259)</td>
+                            <td class="tg-baqh">154(0.17)</td>
+                            <td class="tg-baqh">48(0.338)</td>
+                            <td class="tg-baqh">23(0.089)</td>
+                            <td class="tg-baqh">30(0.216)</td>
+                            <td class="tg-baqh">62(0.236)</td>
+                            <td class="tg-baqh">153(0.169)</td>
+                            <td class="tg-baqh">45(0.317)</td>
+                            <td class="tg-baqh">8(0.031)</td>
+                            <td class="tg-baqh">30(0.216)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(2)부산광역시</td>
+                            <td class="tg-baqh">23(0.087)</td>
+                            <td class="tg-baqh">97(0.107)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">21(0.151)</td>
+                            <td class="tg-baqh">23(0.087)</td>
+                            <td class="tg-baqh">95(0.105)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">20(0.144)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(3)대구광역시</td>
+                            <td class="tg-baqh">4(0.015)</td>
+                            <td class="tg-baqh">67(0.074)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">12(0.086)</td>
+                            <td class="tg-baqh">5(0.019)</td>
+                            <td class="tg-baqh">66(0.073)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">12(0.086)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(4)대전광역시</td>
+                            <td class="tg-baqh">11(0.042)</td>
+                            <td class="tg-baqh">28(0.031)</td>
+                            <td class="tg-baqh">12(0.085)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">10(0.038)</td>
+                            <td class="tg-baqh">22(0.024)</td>
+                            <td class="tg-baqh">12(0.085)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(5)인천광역시</td>
+                            <td class="tg-baqh">2(0.008)</td>
+                            <td class="tg-baqh">108(0.119)</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">7(0.05)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">110(0.121)</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">8(0.058)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(6)광주광역시</td>
+                            <td class="tg-baqh">2(0.008)</td>
+                            <td class="tg-baqh">25(0.028)</td>
+                            <td class="tg-baqh">11(0.077)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                            <td class="tg-baqh">2(0.008)</td>
+                            <td class="tg-baqh">25(0.028)</td>
+                            <td class="tg-baqh">11(0.077)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(7)울산광역시</td>
+                            <td class="tg-baqh">8(0.03)</td>
+                            <td class="tg-baqh">73(0.08)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">6(0.023)</td>
+                            <td class="tg-baqh">71(0.078)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(8)경기</td>
+                            <td class="tg-baqh">64(0.243)</td>
+                            <td class="tg-baqh">25(0.028)</td>
+                            <td class="tg-baqh">42(0.296)</td>
+                            <td class="tg-baqh">225(0.872)</td>
+                            <td class="tg-baqh">32(0.23)</td>
+                            <td class="tg-baqh">67(0.255)</td>
+                            <td class="tg-baqh">15(0.017)</td>
+                            <td class="tg-baqh">40(0.282)</td>
+                            <td class="tg-baqh">245(0.95)</td>
+                            <td class="tg-baqh">29(0.209)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(9)강원</td>
+                            <td class="tg-baqh">11(0.042)</td>
+                            <td class="tg-baqh">18(0.02)</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                            <td class="tg-baqh">13(0.049)</td>
+                            <td class="tg-baqh">23(0.025)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(10)충북</td>
+                            <td class="tg-baqh">9(0.034)</td>
+                            <td class="tg-baqh">28(0.031)</td>
+                            <td class="tg-baqh">14(0.099)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">7(0.05)</td>
+                            <td class="tg-baqh">9(0.034)</td>
+                            <td class="tg-baqh">27(0.03)</td>
+                            <td class="tg-baqh">16(0.113)</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">7(0.05)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(11)충남</td>
+                            <td class="tg-baqh">3(0.011)</td>
+                            <td class="tg-baqh">43(0.047)</td>
+                            <td class="tg-baqh">11(0.077)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">4(0.029)</td>
+                            <td class="tg-baqh">4(0.015)</td>
+                            <td class="tg-baqh">49(0.054)</td>
+                            <td class="tg-baqh">13(0.092)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">4(0.029)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(12)전북</td>
+                            <td class="tg-baqh">7(0.027)</td>
+                            <td class="tg-baqh">41(0.045)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.004)</td>
+                            <td class="tg-baqh">10(0.072)</td>
+                            <td class="tg-baqh">7(0.027)</td>
+                            <td class="tg-baqh">42(0.046)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">11(0.079)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(13)전남</td>
+                            <td class="tg-baqh">11(0.042)</td>
+                            <td class="tg-baqh">31(0.034)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">7(0.05)</td>
+                            <td class="tg-baqh">11(0.042)</td>
+                            <td class="tg-baqh">30(0.033)</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">8(0.058)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(14)경북</td>
+                            <td class="tg-baqh">13(0.049)</td>
+                            <td class="tg-baqh">45(0.05)</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                            <td class="tg-baqh">5(0.019)</td>
+                            <td class="tg-baqh">5(0.036)</td>
+                            <td class="tg-baqh">13(0.049)</td>
+                            <td class="tg-baqh">42(0.046)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.008)</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(15)경남</td>
+                            <td class="tg-baqh">27(0.103)</td>
+                            <td class="tg-baqh">117(0.129)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">29(0.11)</td>
+                            <td class="tg-baqh">120(0.132)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(16)제주도</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">7(0.008)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">7(0.008)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">1(0.007)</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(17)이북</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(18)외국</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                        <tr>
+                            <td class="tg-baqh">(19)세종</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">2(0.008)</td>
+                            <td class="tg-baqh">10(0.01)</td>
+                            <td class="tg-baqh">2(0.014)</td>
+                            <td class="tg-baqh">0</td>
+                            <td class="tg-baqh">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="visualBox">
+                <div class="cluster-size">
+                    <canvas id="multi_sizeChart" width="300px" height="300px"></canvas>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column">
+                    <canvas id="multi_barChart"></canvas>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="multi_ratio_radio" id="multi_ratio_radio12" class="yearradio" /><label for="multi_ratio_radio12">12차시</label>
+                        <input type="radio" name="multi_ratio_radio" id="multi_ratio_radio21" class="yearradio" /><label for="multi_ratio_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <div style="display:flex; justify-content:center" ">
+                        <canvas id="multi_marriageChart" width="250px" height="250px"></canvas>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <button class="multi_otherbtn-marr" value="Cluster1">View Cluster1</button>
+                            <button class="multi_otherbtn-marr" value="Cluster2">View Cluster2</button>
+                            <button class="multi_otherbtn-marr" value="Cluster3">View Cluster3</button>
+                            <button class="multi_otherbtn-marr" value="Cluster4">View Cluster4</button>
+                            <button class="multi_otherbtn-marr" value="Cluster5">View Cluster5</button>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="multi_marriage_radio" id="multi_marriage_radio12" class="yearradio" /><label for="multi_marriage_radio12">12차시</label>
+                        <input type="radio" name="multi_marriage_radio" id="multi_marriage_radio21" class="yearradio" /><label for="multi_marriage_radio21">21차시</label>
+                    </div>
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <canvas id="multi_barChart_edu"></canvas>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="multi_edu_radio" id="multi_edu_radio12" class="yearradio" /><label for="multi_edu_radio12">12차시</label>
+                        <input type="radio" name="multi_edu_radio" id="multi_edu_radio21" class="yearradio" /><label for="multi_edu_radio21">21차시</label>
+                    </div>
+
+                </div>
+                <div class="cluster-size" style="display:flex;flex-direction:column;">
+                    <div style="display:flex; justify-content:center" ">
+                        <canvas id="multi_stayChart" width="250px" height="250px"></canvas>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <button class="multi_otherbtn-stay" value="Cluster1">View Cluster1</button>
+                            <button class="multi_otherbtn-stay" value="Cluster2">View Cluster2</button>
+                            <button class="multi_otherbtn-stay" value="Cluster3">View Cluster3</button>
+                            <button class="multi_otherbtn-stay" value="Cluster4">View Cluster4</button>
+                            <button class="multi_otherbtn-stay" value="Cluster5">View Cluster5</button>
+                        </div>
+                    </div>
+                    <div style="display:flex;justify-content:center;">
+                        <input type="radio" checked name="multi_stay_radio" id="multi_stay_radio12" class="yearradio" /><label for="multi_stay_radio12">12차시</label>
+                        <input type="radio" name="multi_stay_radio" id="multi_stay_radio21" class="yearradio" /><label for="multi_stay_radio21">21차시</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

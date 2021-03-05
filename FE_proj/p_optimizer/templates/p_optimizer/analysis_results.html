@@ -1,0 +1,244 @@
+{% extends 'p_optimizer/base.html' %}
+
+{% block content %}
+<div class="header"></div>
+<div class="container">
+    
+    <div class="return_graph">
+        <canvas id='returngraph'></canvas>
+    </div>
+    <div class="ef_gragh">
+        <canvas id='efficient_frontier_graph'></canvas>
+    </div>
+    <div class='ef_result'>
+        <table class="table table-hover" id='ef_max_table'>
+            <thead>
+                <tr>
+                    <th style="color:#bada55;">Maximum Sharp Portfolio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id='max_tbody'>
+                <tr>
+                    <th>annual return :    {{msharp_pfo.msharp_return}}%</th>
+                    <th>annual volatility :    {{msharp_pfo.msharp_volatility}}%</th>
+                </tr>
+                <tr>
+                    <th>Indes weights</th>
+                    <th>Percentage</th>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-hover" id='ef_min_table'>
+            <thead>
+                <tr>
+                    <th style="color:#f7347a;">Global Minimum Volatility Portfolio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id='gmv_tbody'>
+                <tr>
+                    <th>annual return :    {{gmv_pfo.gmv_return}}%</th>
+                    <th>annual volatility :    {{gmv_pfo.gmv_volatility}}%</th>
+                </tr>
+                <tr>
+                    <th>Indes weights</th>
+                    <th>Percentage</th>
+                </tr>
+            </tbody>
+        </table>
+    
+    
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            drawReturnGraph();
+            drawEfGraph();
+            weights_row();
+            
+        });
+        function weights_row() {
+            var gtbody = document.getElementById('gmv_tbody');
+            var mtbody = document.getElementById('max_tbody');
+            var ind_name = "{{index_names|safe}}";
+            var gmv_weights ="{{gmv_pfo.gmv_weights|safe}}";
+            var msharp_weights = "{{msharp_pfo.msharp_weights|safe}}";
+            ind_name = slicing(ind_name);
+            gmv_weights = slicing(gmv_weights);
+            msharp_weights = slicing(msharp_weights);
+            
+            for(var i=0;i<gmv_weights.length;i++){
+                var grow = gtbody.insertRow(gtbody.rows.length);
+                var mrow = mtbody.insertRow(mtbody.rows.length);
+                
+                var cell1 = grow.insertCell(0);
+                var cell2 = grow.insertCell(1);
+                cell1.innerHTML = ind_name[i];
+                cell2.innerHTML = gmv_weights[i]+"%";
+
+                var cell3 = mrow.insertCell(0);
+                var cell4 = mrow.insertCell(1);
+                cell3.innerHTML = ind_name[i];
+                cell4.innerHTML = msharp_weights[i]+"%";
+            }
+        }
+        function drawReturnGraph() {
+            var ctx = document.getElementById('returngraph').getContext('2d');
+            var x_date = "{{ xy_graph_x|safe }}";
+            var y_return = "{{ xy_graph_y|safe }}";
+
+            x_date = slicing(x_date);
+            y_return= slicing(y_return);
+            
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data : {
+                    labels : x_date,
+                    datasets : [{
+                        label : '수익률 그래프',
+                        backgroundColor : '#00ff0000',
+                        borderColor : 'rgb(255,99,132)',
+                        data : y_return
+                    }]
+                },
+                options : {}
+            });
+        }
+        
+        function drawEfGraph() {
+            var gmv_vol= "{{ gmv_pfo.gmv_volatility|safe }}";
+            var gmv_ret = "{{ gmv_pfo.gmv_return|safe }}";
+            
+            var msharp_ret= "{{ msharp_pfo.msharp_return|safe }}";
+            var msharp_vol = "{{ msharp_pfo.msharp_volatility|safe }}"
+            var ef_pfo_vols = "{{ ef_pfo.ef_volatilities|safe }}";
+            var ef_pfo_rets = "{{ ef_pfo.ef_returns|safe }}";
+            var ind_rets = "{{ individual_pfo.rets|safe }}";
+            var ind_vols = "{{ individual_pfo.stds|safe }}";
+            var ind_names= "{{ index_names|safe }}";
+            var ind_weight = JSON.parse("{{ef_pfo.ef_weights|safe }}");
+
+            ef_pfo_rets = slicing(ef_pfo_rets);
+            ef_pfo_vols = slicing(ef_pfo_vols);
+            ind_rets = slicing(ind_rets);
+            ind_vols = slicing(ind_vols);
+            ind_names = slicing(ind_names);
+            var ctx = document.getElementById('efficient_frontier_graph').getContext('2d');
+
+            var ef_storage= [];
+            
+            for (var i=0;i<ef_pfo_vols.length;i++){
+                x = Number(ef_pfo_vols[i]);
+                y = Number(ef_pfo_rets[i]);
+                var json = {x: x, y:y};
+                ef_storage.push(json);
+            }
+            window.chart2 = new Chart(ctx, {
+                type: 'scatter',
+                data : {
+                    labels : ef_pfo_vols,
+                    datasets : [{
+                        type : 'line',
+                        label : '효율적 투자선',
+                        backgroundColor : '#385a7c',
+                        borderColor : '#f6f4f1',
+                        data : ef_storage,
+                        showLine : true,
+                        fill : false,
+                        order : 1,
+                    }]
+                },
+                options : {
+                    scales : {
+                        yAxes : [{
+                            ticks : {
+                                callback : function (value) {
+                                    return (value/100).toLocaleString('de-DE', {style:'percent'});
+                                }
+                            },
+                            scaleLabel :{
+                                display : true,
+                                labelString : 'annual return',
+                                fontStyle : 'bold',
+                                fontSize : '20',
+                            }
+                        }],
+                        xAxes : [{
+                            ticks : {
+                                callback : function (value) {
+                                    return (value/100).toLocaleString('de-DE', {style:'percent'});
+                                }
+                            },
+                            scaleLabel :{
+                                display : true,
+                                labelString : 'annual volatility',
+                                fontStyle : 'bold',
+                                fontSize : '20',
+
+                            }
+                        }]
+                    },
+                    tooltips : {
+                        mode : 'single',
+                        displayColors : false,
+                        backgroundColor : '#282721',
+                        titleFontColor : '#fff',
+                        titleAlign : 'center',
+                        bodySpacing : 2,
+                        bodyFontColor :'#fff',
+                        bodyAlign : 'center',
+                        callbacks : {
+                            title : function(tooltipitem, data){
+                                return data.datasets[tooltipitem[0]['datasetIndex']].label;
+                            },
+                            label : function(tooltipitem, data){
+                                //console.log(tooltipitem)
+                                var label = "annual_volatility : " + tooltipitem['xLabel'];
+                                label += "  annual_return : " + tooltipitem['yLabel'];
+                                return label;
+                            },
+                            afterLabel : function(tooltipitem,data){
+                                var footer = ' ';
+                                if(tooltipitem['datasetIndex']==0){
+                                    for(var i =0; i<ind_names.length; i++){
+                                        footer+= ind_names[i]+" : "+ind_weight[tooltipitem['index']][i]+"%\n";
+                                    }
+                                }
+                                return footer;
+                            }
+                            }
+                        }
+                },
+            });
+            pushscatter(msharp_vol, msharp_ret, "Maximum Sharpe Portfolio",'#bada55',3);
+            pushscatter(gmv_vol,gmv_ret, "Minimum Volatility Portfolio",'#f7347a',3);
+            for(var i=0;i<ind_rets.length;i++){
+                var randcolor = "#" + Math.round(Math.random()*0xFFFFFF).toString(16);
+                pushscatter(ind_vols[i],ind_rets[i],ind_names[i],randcolor,2);
+            }
+            window.chart2.update();
+
+
+        }
+        function slicing(variable) {
+            variable = variable.split(",");
+            variable[0] = variable[0].replace("[","");
+            variable[variable.length-1] = variable[variable.length-1].replace("]","");
+            return variable;
+        }
+        function pushscatter(x,y,label,color,order){
+            chart2.data.datasets.push({
+                type: 'scatter',
+                label : label,
+                showLine : false,
+                data : [{ x: x, y:y}],
+                backgroundColor : color,
+                pointBackgroundColor : color,
+                pointRadius: 16,
+                pointHoverRadius: 16,
+                order : order,
+            });
+            window.chart2.update();
+        }
+    </script>
+{% endblock %}
