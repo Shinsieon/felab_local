@@ -3,6 +3,11 @@ $(document).ready(function () {
 
     menu_active();
     if (window.location.href.split('/')[3] == 'Cluster_Analysis') {
+        n_sizeChartDraw();
+        n_barChartDraw();
+        n_marriageChartDraw();
+        n_barChartDraw_edu();
+
         jongsa_sizeChartDraw();
         jongsa_barChartDraw();
         jongsa_marriageChartDraw();
@@ -20,6 +25,30 @@ $(document).ready(function () {
         multi_marriageChartDraw();
         multi_barChartDraw_edu();
         multi_stayChartDraw();
+
+        $('.n_otherbtn-marr').click(function () {
+            if ($(this).attr('value') == 'Cluster1') {
+                n_marriageChartData.datasets[0].data = [0, 0, 1, 195, 140];
+                n_marriageChart.options.title.text = '21차시 Cluster1의 혼인상태 분포'
+                n_marriageChart.update();
+
+            }
+            else if ($(this).attr('value') == 'Cluster2') {
+                n_marriageChartData.datasets[0].data = [277, 1797, 7, 3, 0];
+                n_marriageChart.options.title.text = '21차시 Cluster2 의 혼인상태 분포'
+                n_marriageChart.update();
+            }
+            else if ($(this).attr('value') == 'Cluster3') {
+                n_marriageChartData.datasets[0].data = [32, 1072, 16, 0, 0];
+                n_marriageChart.options.title.text = '21차시 Cluster3 의 혼인상태 분포'
+                n_marriageChart.update();
+            }
+            else if ($(this).attr('value') == 'Cluster4') {
+                n_marriageChartData.datasets[0].data = [87, 1328, 18, 51, 0];
+                n_marriageChart.options.title.text = '21차시 Cluster4 의 혼인상태 분포'
+                n_marriageChart.update();
+            }
+        });
 
         $('input[name="jongsa_ratio_radio"]').change(function () {
             if ($(this).attr('id') == 'jongsa_ratio_radio12') {
@@ -1228,6 +1257,204 @@ function lc_weight_graph(Y_risky, Y_risk_free){
     });
     window.lc_chart.update();
 }
+
+//
+//cluster_analysis 0번째
+//
+let n_sizeChartData = {
+    labels: ['cluster1', 'cluster2', 'cluster3', 'cluster4'],
+    datasets: [{
+        data: [336, 2084, 1120, 1484],
+        backgroundColor: ['rgb(255, 159, 64)', 'rgb(255, 99, 132)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)']
+    }]
+    // 'rgb(153, 102, 255)' 
+};
+let n_sizeChartDraw = function () {
+
+    let n_sizectx = document.getElementById('n_sizeChart').getContext('2d');
+
+    window.n_pieChart = new Chart(n_sizectx, {
+
+        type: 'pie',
+        data: n_sizeChartData,
+        options: {
+            plugins: {
+                datalabels: {
+                    formatter: function (value, context) {
+                        return context.chart.data.labels[context.dataIndex];
+                    }
+                }
+            },
+            cutoutPercentage: 31,
+            responsive: false,
+            title: {
+                display: true,
+                text: '클러스터 규모',
+
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+};
+let n_barChartData = {
+    labels: ["Cluster1", "Cluster2", "Cluster3", "Cluster4"],
+    datasets: [
+        {
+            label: "성별(남성) 비율",
+            backgroundColor: "lightblue",
+            borderColor: "lightblue",
+            borderWidth: 1,
+            data: [0.38, 0.7, 0.76, 0.1, 0.73]
+        },
+        {
+            label: "국민연금가입 비율",
+            backgroundColor: "pink",
+            borderColor: "pink",
+            borderWidth: 1,
+            data: [0.303, 0.715, 0.598, 0.333, 0.177]
+        },
+        {
+            label: "정규직 비율",
+            backgroundColor: "lightgreen",
+            borderColor: "lightgreen",
+            borderWidth: 1,
+            data: [0.242, 0.851, 0.684, 0.333, 0.177]
+        },
+
+    ]
+};
+let n_barChartDraw = function () {
+    var n_barctx = document.getElementById('n_barChart').getContext('2d');
+    window.n_barChart = new Chart(n_barctx, {
+
+        type: 'bar',
+        data: n_barChartData,
+        options: {
+            layout: {
+                padding: {
+                    bottom: 20,
+                }
+            },
+            title: {
+                display: true,
+                text: '21차시 성별, 국민연금가입, 정규직 비율 분포'
+            },
+        },
+        responsive: false,
+
+
+        legend: {
+            display: true,
+        }
+    });
+};
+let n_marriageChartData = {
+    labels: ['미혼', '기혼', '별거', '이혼', '사별'],
+    datasets: [{
+        data: [0,0,1,195,140],
+        backgroundColor: ['rgb(255, 159, 64)', 'rgb(255, 99, 132)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)']
+    }]
+    // 'rgb(153, 102, 255)' 
+};
+let n_marriageChartDraw = function () {
+
+    var n_marriagectx = document.getElementById('n_marriageChart').getContext('2d');
+
+    window.n_marriageChart = new Chart(n_marriagectx, {
+
+        type: 'pie',
+        data: n_marriageChartData,
+        options: {
+            plugins: {
+                datalabels: {
+                    formatter: function (value, context) {
+                        return context.chart.data.labels[context.dataIndex];
+                    }
+                }
+            },
+            cutoutPercentage: 31,
+            responsive: false,
+            title: {
+                display: true,
+                text: '21차시 Cluster1의 혼인상태 분포',
+
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+};
+let n_barChartData_edu = {
+    labels: [
+        "Cluster1", "Cluster2", "Cluster3", "Cluster4"],
+    datasets: [
+        {
+            label: "중졸 이하",
+            backgroundColor: "lightblue",
+            borderColor: "lightblue",
+            borderWidth: 1,
+            data: [0.44, 0.007, 0.435, 0.269]
+        },
+        {
+            label: "고졸",
+            backgroundColor: "pink",
+            borderColor: "pink",
+            borderWidth: 1,
+            data: [0.393, 0.258, 0.398, 0.418]
+        },
+        {
+            label: "전문대졸",
+            backgroundColor: "lightgreen",
+            borderColor: "lightgreen",
+            borderWidth: 1,
+            data: [0.045, 0.234, 0.029, 0.11]
+        },
+        {
+            label: "대졸",
+            backgroundColor: "lightyellow",
+            borderColor: "lightyellow",
+            borderWidth: 1,
+            data: [0.116, 0.401, 0.122, 0.178]
+        },
+        {
+            label: "석사",
+            backgroundColor: "grey",
+            borderColor: "grey",
+            borderWidth: 1,
+            data: [0.003, 0.08, 0.013, 0.02]
+        },
+        {
+            label: "박사",
+            backgroundColor: "Red",
+            borderColor: "Red",
+            borderWidth: 1,
+            data: [0.003, 0.021, 0.003, 0.005]
+        },
+
+    ]
+};
+let n_barChartDraw_edu = function () {
+    var n_barctx_edu = document.getElementById('n_barChart_edu').getContext('2d');
+    window.n_barChart_edu = new Chart(n_barctx_edu, {
+
+        type: 'bar',
+        data: n_barChartData_edu,
+        responsive: false,
+        options: {
+            title: {
+                display: true,
+                text: '21차시  최종학력 분포'
+            }
+        },
+        legend: {
+            display: true,
+        }
+    });
+};
+
 //
 //cluster_analysis 1번째
 //

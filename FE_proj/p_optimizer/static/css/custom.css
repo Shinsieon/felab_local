@@ -235,7 +235,7 @@ footer{
     display:flex;
     margin-bottom: 50px;
 }
-.jongsa_otherbtn-marr, .jongsa_otherbtn-stay, .job_otherbtn-marr, .job_otherbtn-stay, .multi_otherbtn-marr, .multi_otherbtn-stay {
+.n_otherbtn-marr, .jongsa_otherbtn-marr, .jongsa_otherbtn-stay, .job_otherbtn-marr, .job_otherbtn-stay, .multi_otherbtn-marr, .multi_otherbtn-stay {
     width: 80px;
     height: 25px;
     border: 0px;
