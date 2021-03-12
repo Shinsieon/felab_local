@@ -16,31 +16,32 @@
     <script type='text/javascript' src="{% static 'js/datepicker-ko.js' %}"></script>
     <script type='text/javascript' src="{% static 'js/custom.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    
+
 
 </head>
 
-    <body>
-      <div style="position:absolute;width: 100%;height: 1500px;background-color: rgba(0, 0, 0, 0.7);display:none;z-index: 9;" id='loading_back'></div>
-      <div style="margin: 20% 42%; position: absolute;z-index:10;display: none;text-align: center;" id='wrap_loading'>
+
+<body>
+    <div style="position:absolute;width: 100%;height: 1500px;background-color: rgba(0, 0, 0, 0.7);display:none;z-index: 9;" id='loading_back'></div>
+    <div style="margin: 20% 42%; position: absolute;z-index:10;display: none;text-align: center;" id='wrap_loading'>
         <label style='font-size: 20px;z-index: 11;color: white;'>최적화 중입니다.</label>
-        
+
         <img src="{% static 'images/loading.gif' %}"></img>
-      </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg fixed-top" style="background-color: #0a014d;height:80px;">
-            <a class="navbar-brand nohover" href="#" style="font-size:15px;font-style: bold;">Financial Engineering Lab</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id='navbar'>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg fixed-top" style="background-color: #0a014d;height:80px;">
+        <a class="navbar-brand nohover" href="#" style="font-size:15px;font-style: bold;">Financial Engineering Lab</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" id='navbar'>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/home" id="home">Home</a>
+                    <a class="nav-link" href="/home" id="home">Home</a>
                 </li>
                 <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <li class="nav-item">
-                  <a class="nav-link" href="/ret_graph" id="ret_graph">Portfolio Return Graph</a>
+                    <a class="nav-link" href="/ret_graph" id="ret_graph">Portfolio Return Graph</a>
                 </li>
                 <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <li class="nav-item">
@@ -50,17 +51,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Cluster_Analysis" id="Cluster_Analysis">Cluster Analysis</a>
                 </li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </div>
-          </nav>
-        <div id='wrap'>
+            </form>
+        </div>
+    </nav>
+    <div id='wrap'>
         {% block content %}
         {% endblock %}
-        </div>
-        
-    </body>
+    </div>
+
+</body>
 </html>

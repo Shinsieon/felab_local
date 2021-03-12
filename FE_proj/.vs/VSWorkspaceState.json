@@ -9,6 +9,6 @@
     "\\p_optimizer\\templates",
     "\\p_optimizer\\templates\\p_optimizer"
   ],
-  "SelectedNode": "\\p_optimizer\\static\\js\\custom.js",
+  "SelectedNode": "\\p_optimizer\\templates\\p_optimizer\\base.html",
   "PreviewInSolutionExplorer": false
 }
